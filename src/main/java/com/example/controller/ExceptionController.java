@@ -42,7 +42,7 @@ public class ExceptionController {
     @ExceptionHandler(LoginException.class)
     public ResponseEntity<String> handleLoginExceptions(Exception e) {
         System.out.println(e.getMessage());
-        return ResponseEntity.badRequest().body(e.getMessage());
+        return ResponseEntity.status(HttpServletResponse.SC_UNAUTHORIZED).body(e.getMessage());
     }
 
 
