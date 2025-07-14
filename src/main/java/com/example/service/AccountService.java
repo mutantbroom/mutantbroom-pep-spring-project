@@ -2,7 +2,9 @@ package com.example.service;
 
 import com.example.entity.Account;
 
-public class AccountService {
+
+public interface AccountService {
+
 
     Account register(Account potentialNewAccount);
 

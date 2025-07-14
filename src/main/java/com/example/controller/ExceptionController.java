@@ -2,6 +2,9 @@ package com.example.controller;
 
 import javax.security.auth.login.LoginException;
 
+import com.example.exception.AccountAlreadyExistsException;
+import com.example.exception.MessageFormatException;
+import com.example.exception.RegistrationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;

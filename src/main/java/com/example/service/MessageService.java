@@ -4,7 +4,7 @@ import com.example.entity.Message;
 
 import java.util.List;
 
-public class MessageService {
+public interface MessageService {
     Message post(Message potentialMessage);
 
 
