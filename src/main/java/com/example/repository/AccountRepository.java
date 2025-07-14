@@ -15,15 +15,8 @@ public interface AccountRepository extends JpaRepository<Account, Integer>{
 
 
     
-    boolean existsByUsername(String username);
+    Account findByUsername(String name); // Optional introduced in Java 8. Instead of checking if the return value is null, we can use Optional
+    boolean existsByUsername(String username); // Here we are able to use the existsBy{entity field}. The @Entity and @Column annotations in the entity class help define this capability
+    boolean existsByPassword(String password); // We are leveraging Spring Data JPA here again. 
 
-
-
-    
-    Optional<Account> findByUsernameAndPassword(String username, String password);
-
-
-
-    
-    boolean existsByAccountId(Integer accountId);
 }
