@@ -11,6 +11,7 @@ import com.example.exception.ClientErrorException;
 import com.example.repository.AccountRepository;
 import com.example.repository.MessageRepository;
 
+@Service
 public class MessageService {
     @Autowired
     MessageRepository messageRepository;
