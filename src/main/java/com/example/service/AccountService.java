@@ -12,7 +12,7 @@ import com.example.exception.*;
 @Service
 public class AccountService {
 
- @Autowired
+    @Autowired
     AccountRepository accountRepository;
 
 
