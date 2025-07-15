@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.entity.Account;
 import com.example.entity.Message;
-import com.example.exception.ClientErrorException;
 import com.example.service.AccountService;
 import com.example.service.MessageService;
 
@@ -35,7 +34,7 @@ public class SocialMediaController {
     MessageService messageService;
 
     @PostMapping("/register")
-    public ResponseEntity<Account> registerUser(@RequestBody Account account){ // We forgot to add the @ResponseBody annotation in the method signature{
+    public ResponseEntity<Account> registerUser(@RequestBody Account account){
         Account newAccount = accountService.registerUser(account);
         return ResponseEntity.ok(newAccount);
     }
@@ -64,6 +63,12 @@ public class SocialMediaController {
         return ResponseEntity.ok(message);
     }
 
+    @GetMapping("/accounts/{accountId}/messages")
+    public ResponseEntity<List<Message>> getAllMessagesByUserAccountId(@PathVariable("accountId") Integer accountId){
+        List<Message> messageList = messageService.getListOfMessagesForIndividualUser(accountId);
+        return ResponseEntity.ok(messageList);
+    }
+
     @DeleteMapping("/messages/{messageId}")
     public ResponseEntity<?> deleteMessageById(@PathVariable("messageId") Integer messageId){
         Integer inty = messageService.deleteMessageById(messageId);
@@ -81,12 +86,6 @@ public class SocialMediaController {
     public ResponseEntity<?> updateMessageById(@PathVariable("messageId") Integer messageId, @RequestBody Message message){
         Integer returnInt = messageService.updateMessageById(messageId, message);
         return ResponseEntity.ok(returnInt);
-    }
-
-    @GetMapping("/accounts/{accountId}/messages")
-    public ResponseEntity<List<Message>> getAllMessagesByUserAccountId(@PathVariable("accountId") Integer accountId){
-        List<Message> messageList = messageService.getListOfMessagesForIndividualUser(accountId);
-        return ResponseEntity.ok(messageList);
     }
 
 }

@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.entity.Message;
-import com.example.exception.ClientErrorException;
+import com.example.exception.ClientException;
 import com.example.repository.AccountRepository;
 import com.example.repository.MessageRepository;
 
@@ -20,11 +20,11 @@ public class MessageService {
     AccountRepository accountRepository;
     public Message addMessage(Message message){
         if (message.getMessageText() == "") {
-            throw new ClientErrorException("Message can't be blank");
+            throw new ClientException("Blank input");
         }
         if(message.getMessageText().length() > 255)
         {
-            throw new ClientErrorException("Message can't be over 255 characters");
+            throw new ClientException("Over 255 characters");
         }
         if(accountRepository.existsById(message.getPostedBy()) == true)
         {
@@ -33,7 +33,7 @@ public class MessageService {
         }
         else
         {
-            throw new ClientErrorException("Could not find associated postby id");
+            throw new ClientException("Could not find postby id");
         }
     }
 
@@ -62,18 +62,18 @@ public class MessageService {
     public Integer updateMessageById(Integer messageId, Message message){
         if(message.getMessageText() == "")
         {
-            throw new ClientErrorException("You are dead wrong for that.");
+            throw new ClientException("Update Message error");
         }
         if (message.getMessageText().length() > 255) {
-            throw new ClientErrorException("You are dead wrong for that.");
+            throw new ClientException("Update Message error");
         }
         if(!messageRepository.existsById(messageId))
         {
-            throw new ClientErrorException("You are dead wrong for that.");
+            throw new ClientException("Update Message error");
         }
         else
         {
-            Message newMessage = messageRepository.findById(messageId).orElseThrow(() -> new ClientErrorException("Cmon son"));
+            Message newMessage = messageRepository.findById(messageId).orElseThrow(() -> new ClientException("Cmon son"));
             newMessage.setMessageText(message.getMessageText());
             return 1;
         }
