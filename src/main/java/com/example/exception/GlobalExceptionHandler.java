@@ -13,8 +13,8 @@ public class GlobalExceptionHandler {
     return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
    }     
    
-   @ExceptionHandler(UnauthorizedException.class)
-   public ResponseEntity<String> statusCode401(UnauthorizedException ex){
+   @ExceptionHandler(AuthorizationException.class)
+   public ResponseEntity<String> statusCode401(AuthorizationException ex){
       return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(ex.getMessage());
    }
     

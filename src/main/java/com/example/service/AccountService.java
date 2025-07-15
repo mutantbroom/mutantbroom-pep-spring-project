@@ -29,7 +29,7 @@ public class AccountService {
     public Account loginUser(Account account){
         if((accountRepository.existsByUsername(account.getUsername())) == false || (accountRepository.existsByPassword(account.getPassword())) == false)
         {
-            throw new UnauthorizedException("Invalid Credentials");
+            throw new AuthorizationException("Invalid Credentials");
         }
         else 
         {
